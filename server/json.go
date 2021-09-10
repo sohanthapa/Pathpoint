@@ -16,21 +16,23 @@ type DataFileInput struct {
 	Id        string `json:"id"`
 }
 
+//IsJSON checks if the string is a valid json format
 func IsJSON(str string) bool {
 	var js json.RawMessage
 	return json.Unmarshal([]byte(str), &js) == nil
 }
 
+//UnMarshallJSON unmarshalls the string s into DataFileInput struct
 func UnMarshallJSON(s string) (DataFileInput, error) {
-	var dataFile DataFileInput
+	var dataFileInput DataFileInput
 	// unmarschal JSON
-	err := json.Unmarshal([]byte(s), &dataFile)
+	err := json.Unmarshal([]byte(s), &dataFileInput)
 
 	//check for error when unmarshalling
 	if err != nil {
 		return DataFileInput{}, err
 	}
-	return dataFile, nil
+	return dataFileInput, nil
 }
 
 // writeJSON encode data as JSON and prints the data in JSON format
