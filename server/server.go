@@ -9,8 +9,9 @@ import (
 	"strings"
 )
 
-//ReadFromFile function reads each line from the provided file
-func ReadFromFile(file *os.File, numOfScores int) {
+//ReadFromFile function reads each line from the provided file and appends the necessary
+// values to the scoreRecord list
+func ReadFromFile(file *os.File, numOfScores int) ([]models.ScoreRecord, error) {
 	scoreRecordList := make([]models.ScoreRecord, 0)
 	fscanner := bufio.NewScanner(file)
 	//reading line by line
@@ -23,8 +24,7 @@ func ReadFromFile(file *os.File, numOfScores int) {
 				fp := strings.Trim(firstPart, ":")
 				score, err := strconv.Atoi(fp)
 				if err != nil {
-					//print error message here
-					return
+					return []models.ScoreRecord{}, ErrStringToIntConvert
 				}
 				sr := getScoreRecord(secondPart, score)
 				scoreRecordList = append(scoreRecordList, sr)
@@ -32,10 +32,11 @@ func ReadFromFile(file *os.File, numOfScores int) {
 		}
 	}
 
+	//sort in descending order
 	sort.Slice(scoreRecordList, func(i, j int) bool {
 		return scoreRecordList[j].Score < scoreRecordList[i].Score
 	})
 
-	outputList := getScoreRecordList(numOfScores, scoreRecordList)
-	writeJSON(outputList)
+	return scoreRecordList, nil
+
 }

@@ -35,8 +35,8 @@ func UnMarshallJSON(s string) (DataFileInput, error) {
 	return dataFileInput, nil
 }
 
-// writeJSON encode data as JSON and prints the data in JSON format
-func writeJSON(data interface{}) {
+// WriteJSON encode data as JSON and prints the data in JSON format
+func WriteJSON(data interface{}) {
 	prettyJSON, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		log.Fatal("Failed to generate json", err)

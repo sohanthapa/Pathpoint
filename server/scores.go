@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-// getScoreRecord sets the score record value from
+// GetScoreRecord sets the score record value from
 // the unmarshalled value of score info.
 // ScoreRecord value keeps track of the Score, if the JSON value is valid for the
 // ScoreRecord and the Id of the ScoreRecord
@@ -32,25 +32,24 @@ func getScoreRecord(scoreInfo string, score int) models.ScoreRecord {
 	return sr
 }
 
-//getScoreRecordList sets all the ScoreOutput into an output list and returns that value.
-func getScoreRecordList(numOfScores int, scoreRecordList []models.ScoreRecord) []models.ScoreOutput {
+//GetScoreRecordList sets all the ScoreOutput into an output list and returns that value.
+func GetScoreRecordList(numOfScores int, scoreRecordList []models.ScoreRecord) ([]models.ScoreOutput, error) {
 	var j int
 	outputList := make([]models.ScoreOutput, 0)
-	for _, y := range scoreRecordList {
+	//loop through the scoreRecordList and append the value to the outputList
+	for _, sr := range scoreRecordList {
 		if j < numOfScores {
-			if y.ValidJSON {
+			if sr.ValidJSON {
 				o := models.ScoreOutput{
-					Score: y.Score,
-					Id:    y.Id,
+					Score: sr.Score,
+					Id:    sr.Id,
 				}
 				outputList = append(outputList, o)
-				fmt.Println(y.Score)
 				j++
 			} else {
-				fmt.Println("invalid json for values")
-				return []models.ScoreOutput{}
+				return []models.ScoreOutput{}, ErrInvalidJSON
 			}
 		}
 	}
-	return outputList
+	return outputList, nil
 }
