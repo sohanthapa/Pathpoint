@@ -20,9 +20,9 @@ func main() {
 		log.Println(server.ErrFileOpen)
 		return
 	}
-	scoreRecordList, _ := server.ReadFromFile(file, numOfScores)
+	scoreRecords, _ := server.ReadFromFile(file)
 
-	outputList, err := server.GetScoreRecordList(numOfScores, scoreRecordList)
+	outputList, err := server.GetScoreRecordList(numOfScores, scoreRecords)
 	if err != nil {
 		log.Println(err)
 		return

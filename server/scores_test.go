@@ -15,7 +15,7 @@ func TestGetScoreRecordList(t *testing.T) {
 			{
 				Score:     12344,
 				ValidJSON: false,
-				Id:        "123445",
+				ID:        "123445",
 			},
 		}
 		outputList, err := GetScoreRecordList(numOfScores, scoreRecordList)
@@ -29,12 +29,12 @@ func TestGetScoreRecordList(t *testing.T) {
 			{
 				Score:     12344,
 				ValidJSON: true,
-				Id:        "123445",
+				ID:        "123445",
 			},
 			{
 				Score:     12347,
 				ValidJSON: true,
-				Id:        "123445gttg",
+				ID:        "123445gttg",
 			},
 		}
 		outputList, err := GetScoreRecordList(numOfScores, scoreRecordList)

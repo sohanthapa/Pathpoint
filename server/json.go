@@ -13,7 +13,7 @@ type DataFileInput struct {
 	Payload   string `json:"payload"`
 	DateStamp int    `json:"date_stamp"`
 	Time      int    `json:"time"`
-	Id        string `json:"id"`
+	ID        string `json:"id"`
 }
 
 //IsJSON checks if the string is a valid json format

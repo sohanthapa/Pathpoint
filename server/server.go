@@ -2,18 +2,18 @@ package server
 
 import (
 	"Pathpoint/models"
+	"Pathpoint/utils/helpers"
 	"bufio"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
 
 //ReadFromFile function reads each line from the provided file and appends the necessary
 // values to the scoreRecord list
-func ReadFromFile(file *os.File, numOfScores int) ([]models.ScoreRecord, error) {
-	scoreRecordList := make([]models.ScoreRecord, 0)
+func ReadFromFile(file *os.File) ([]models.ScoreRecord, error) {
 	fscanner := bufio.NewScanner(file)
+	scoreMap := make(models.ScoreMap)
 	//reading line by line
 	for fscanner.Scan() {
 		if len(fscanner.Text()) > 0 {
@@ -24,19 +24,14 @@ func ReadFromFile(file *os.File, numOfScores int) ([]models.ScoreRecord, error) 
 				fp := strings.Trim(firstPart, ":")
 				score, err := strconv.Atoi(fp)
 				if err != nil {
-					return []models.ScoreRecord{}, ErrStringToIntConvert
+					return []models.ScoreRecord{}, ErrConvertStringToInt
 				}
-				sr := getScoreRecord(secondPart, score)
-				scoreRecordList = append(scoreRecordList, sr)
+				sr := getScoreRecord(secondPart)
+				scoreMap[score] = sr
 			}
 		}
 	}
+	scoreRecords := helpers.SortInReverse(scoreMap)
 
-	//sort in descending order
-	sort.Slice(scoreRecordList, func(i, j int) bool {
-		return scoreRecordList[j].Score < scoreRecordList[i].Score
-	})
-
-	return scoreRecordList, nil
-
+	return scoreRecords, nil
 }

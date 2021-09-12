@@ -2,15 +2,11 @@ package models
 
 //ScoreRecord represents the score info being saved
 type ScoreRecord struct {
-	Score     int
-	ValidJSON bool
-	Id        string
+	ValidJSON bool   `json:"-"`
+	ID        string `json:"id"`
+	Score     int    `json:"score"`
 }
 
-//ScoreOutput represents the output of the score along with its id
-type ScoreOutput struct {
-	Score int    `json:"score"`
-	Id    string `json:"id"`
-}
+type ScoreMap map[int]ScoreRecord
 
 // NOTE: add validation for the fields in the structs above for future
