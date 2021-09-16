@@ -2,6 +2,7 @@ package main
 
 import (
 	"Pathpoint/server"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -20,13 +21,24 @@ func main() {
 		log.Println(server.ErrFileOpen)
 		return
 	}
-	scoreRecords, _ := server.ReadFromFile(file)
+	scoreRecords, err := server.ReadFromFile(file)
+
+	if err != nil {
+		log.Println(err)
+		return
+	}
 
 	outputList, err := server.GetScoreRecordList(numOfScores, scoreRecords)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	server.WriteJSON(outputList) // write to json format
+	finalOutput, err := server.WriteJSON(outputList) // write the final output to json format
+	if err != nil {
+		log.Println(err)
+		return
+	} else {
+		fmt.Printf("%s\n", finalOutput)
+	}
 
 }

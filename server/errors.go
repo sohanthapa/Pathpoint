@@ -5,7 +5,7 @@ import (
 )
 
 var (
-	ErrInvalidJSON        = errors.New("invalid json")
+	ErrInvalidJSON        = errors.New("invalid json format")
 	ErrConvertStringToInt = errors.New("error converting string to an int")
 	ErrFileOpen           = errors.New("error when opening a file")
 	ErrMissingArgs        = errors.New("missing two args from command line ")

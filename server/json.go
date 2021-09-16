@@ -2,7 +2,6 @@ package server
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 )
 
@@ -25,7 +24,7 @@ func IsJSON(str string) bool {
 //UnMarshallJSON unmarshalls the string s into DataFileInput struct
 func UnMarshallJSON(s string) (DataFileInput, error) {
 	var dataFileInput DataFileInput
-	// unmarschal JSON
+	// unmarshal JSON
 	err := json.Unmarshal([]byte(s), &dataFileInput)
 
 	//check for error when unmarshalling
@@ -36,10 +35,11 @@ func UnMarshallJSON(s string) (DataFileInput, error) {
 }
 
 // WriteJSON encode data as JSON and prints the data in JSON format
-func WriteJSON(data interface{}) {
+func WriteJSON(data interface{}) (string, error) {
 	prettyJSON, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		log.Fatal("Failed to generate json", err)
+		return "", err
 	}
-	fmt.Printf("%s\n", string(prettyJSON))
+	return string(prettyJSON), nil
 }

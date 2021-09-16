@@ -1,0 +1,1 @@
+1062287@: {"umbrella": 99180, "name": "24490249af01e145437f2f64d5ddb9c04463c033", "value": 12354, "payload": "........", "date_stamp": 58874, "time": 615416, "id": "3c867674494e4a7aac9247a9d9a2179c"}

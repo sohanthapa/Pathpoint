@@ -40,7 +40,8 @@ func GetScoreRecordList(numOfScores int, scoreRecords []models.ScoreRecord) ([]S
 	var j int
 
 	outputList := make([]ScoreOutput, 0)
-	//loop through the scoreRecordList and append the value to the outputList
+	//loop through the scoreRecords and append the value to the outputList
+	// we also check if the json is valid for each of the score record
 	for _, sr := range scoreRecords {
 		if j < numOfScores {
 			if sr.ValidJSON {
