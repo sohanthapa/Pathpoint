@@ -38,7 +38,9 @@ func main() {
 		log.Println(err)
 		return
 	} else {
-		fmt.Printf("%s\n", finalOutput)
+		fmt.Printf("%s\n", finalOutput) // display the final result
 	}
 
 }
+
+// NOTE: talk about assumptions, goodFile/badFile, all the corner cases, validation in models package for future

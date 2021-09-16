@@ -5,6 +5,7 @@ import (
 	"sort"
 )
 
+//SortInReverse sorts the given ScoreMap in descending order
 func SortInReverse(scoreMap models.ScoreMap) []models.ScoreRecord {
 	scoreRecords := make([]models.ScoreRecord, 0)
 	keys := make([]int, 0, len(scoreMap))
