@@ -17,6 +17,7 @@ func main() {
 	}
 	numOfScores, _ := strconv.Atoi(args[1])
 	file, err := os.Open(args[0])
+
 	if err != nil {
 		log.Println(server.ErrFileOpen)
 		return
